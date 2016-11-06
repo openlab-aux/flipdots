@@ -89,7 +89,7 @@ def render_frames(imgmap):
     finished = True
 
 
-def send_frames():
+def send_frames(host, port):
     global framebuffer
     global finished
     frame_pos = 0
@@ -99,18 +99,18 @@ def send_frames():
 
     while not finished or frames_left(frame_pos, framebuffer):
         if frames_left(frame_pos, framebuffer):
-            sock.sendto(framebuffer[frame_pos], (UDPHOST, UDPPORT))
+            sock.sendto(framebuffer[frame_pos], (host, port))
             time.sleep(1.0/FPS)
             frame_pos += 1
         else:
             continue
 
-def scroll_text(text):
+def scroll_text(host, port, text):
     text = text.strip()
     imgmap = str2array(text)
 
     renderer = threading.Thread(target=render_frames,args=(imgmap,))
-    sender = threading.Thread(target=send_frames)
+    sender = threading.Thread(target=send_frames,args=(host,port))
 
     renderer.start()
     sender.start()
@@ -123,7 +123,7 @@ if __name__ == '__main__':
             text = sys.stdin.readline().decode('utf-8').strip()
             if text == "":
                 break
-            scroll_text(text)
+            scroll_text(UDPHOST,UDPPORT,text)
     except KeyboardInterrupt:
         print("Exited due to Ctrl-C")
         sys.exit(0)
