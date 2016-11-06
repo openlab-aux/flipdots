@@ -36,8 +36,8 @@ def list2byte(l):
 def array2packet(a):
     return str(bytearray([list2byte(a[i*8:i*8+8]) for i in range(len(a)/8)]))
 
-def str2array(s):
-    font = ImageFont.load_default()
+def str2array(s,font):
+    font = ImageFont.truetype(font=font,size=FONT_SIZE)
 
     img_width = font.getsize(s)[0]
     image     = Image.new("RGBA", (img_width,DISPLAY_SIZE[1]), C_BLACK)
@@ -105,9 +105,9 @@ def send_frames(host, port):
         else:
             continue
 
-def scroll_text(host, port, text):
+def scroll_text(host, port, font, text):
     text = text.strip()
-    imgmap = str2array(text)
+    imgmap = str2array(text,font)
 
     renderer = threading.Thread(target=render_frames,args=(imgmap,))
     sender = threading.Thread(target=send_frames,args=(host,port))
@@ -123,7 +123,7 @@ if __name__ == '__main__':
             text = sys.stdin.readline().decode('utf-8').strip()
             if text == "":
                 break
-            scroll_text(UDPHOST,UDPPORT,text)
+            scroll_text(UDPHOST, UDPPORT, "/path/to/font.ttf", text)
     except KeyboardInterrupt:
         print("Exited due to Ctrl-C")
         sys.exit(0)
