@@ -10,7 +10,7 @@ import threading
 UDPHOST="flipdot.openlab.lan"
 UDPPORT=2323
 
-FPS = 13
+FPS = 9
 STEPS = 1
 INVERT=True
 
@@ -105,21 +105,25 @@ def send_frames():
         else:
             continue
 
-try:
-    while True:
-        text = sys.stdin.readline().decode('utf-8').strip()
-        if text == "":
-            break
-        imgmap = str2array(text)
+def scroll_text(text):
+    text = text.strip()
+    imgmap = str2array(text)
 
-        renderer = threading.Thread(target=render_frames,args=(imgmap,))
-        sender = threading.Thread(target=send_frames)
+    renderer = threading.Thread(target=render_frames,args=(imgmap,))
+    sender = threading.Thread(target=send_frames)
 
-        renderer.start()
-        sender.start()
+    renderer.start()
+    sender.start()
 
-        sender.join()
+    sender.join()
 
-except KeyboardInterrupt:
-    print("Exited due to Ctrl-C")
-    sys.exit(0)
+if __name__ == '__main__':
+    try:
+        while True:
+            text = sys.stdin.readline().decode('utf-8').strip()
+            if text == "":
+                break
+            scroll_text(text)
+    except KeyboardInterrupt:
+        print("Exited due to Ctrl-C")
+        sys.exit(0)
