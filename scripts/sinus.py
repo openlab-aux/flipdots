@@ -39,7 +39,7 @@ def draw_sine(image, scale, offset, freq, phase):
     for col in range(COLS):
         x = (col-COLS/2.0)/100.0
         y = math.sin(x*freq+phase)
-        target_row = round(y*scale + offset)
+        target_row = math.floor(y*scale + offset) + 1
         print target_row
         for row in range(ROWS):
             if target_row == row:
