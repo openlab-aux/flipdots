@@ -7,7 +7,7 @@ from random import randint
 import os
 import platform
 
-UDPHOST="flipdot.openlab.lan"
+UDPHOST="flipdot.lab"
 UDPPORT=2323
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

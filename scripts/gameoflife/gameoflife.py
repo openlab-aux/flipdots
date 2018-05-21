@@ -5,9 +5,9 @@ from random import randint
 
 
 
-UDPHOST="flipdot.openlab.lan"
+UDPHOST="flipdot.lab"
 #UDPHOST="fe80::221:6bff:fe4c:6e7c"
-UDPHOSTS=["flipdot.openlab.lan"]
+UDPHOSTS=["flipdot.lab"]
 UDPPORT=2323
 
 DELAY =0.07

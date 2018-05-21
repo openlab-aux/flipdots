@@ -3,7 +3,7 @@ from font import font8px
 
 class FlipdotMatrix():
     def __init__(self, 
-                 udpHostsAndPorts = [("flipdot.openlab.lan", 2323)],
+                 udpHostsAndPorts = [("flipdot.lab", 2323)],
                  imageSize=(16, 80),
                  transposed = True
                  ):

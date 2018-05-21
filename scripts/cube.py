@@ -2,7 +2,7 @@
 import socket, time, math
 import numpy as np
 
-UDPHOST="flipdot.openlab.lan"
+UDPHOST="flipdot.lab"
 UDPPORT=2323
 
 SIZE_Y = 16

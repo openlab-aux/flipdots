@@ -7,7 +7,7 @@ import sys
 import fileinput
 import threading
 
-UDPHOST="flipdot.openlab.lan"
+UDPHOST="flipdot.lab"
 UDPPORT=2323
 
 FPS = 9

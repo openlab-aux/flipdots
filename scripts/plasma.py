@@ -1,7 +1,7 @@
 #!/usr/bin/env python2 
 import socket, time, math
 
-UDPHOST="flipdot.openlab.lan"
+UDPHOST="flipdot.lab"
 UDPPORT=2323
 
 SIZE_Y = 16
